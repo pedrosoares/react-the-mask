@@ -27,12 +27,12 @@ class TheMask extends React.Component {
         mask(this.el.current, {value: this.config.mask});
     }
 
-    onInput (e) {
+    onInput = (e) => {
         if (e.isTrusted) return; // ignore native event
         this.refresh(e.target.value);
-    }
+    };
 
-    refresh (value) {
+    refresh = (value) => {
         this.setState({display: value});
         let val = masker(value, this.config.mask, this.config.masked, this.config.tokens);
         if (val !== this.state.lastValue) {
@@ -41,7 +41,7 @@ class TheMask extends React.Component {
                 this.props.onChange(val);
             }
         }
-    }
+    };
 
     render(){
         return (<input type="text" ref={this.el} value={this.state.display} onChange={this.onInput} />);
