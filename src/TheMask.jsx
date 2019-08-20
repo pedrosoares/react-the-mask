@@ -1,5 +1,6 @@
 import React from 'react';
-import {mask, tokens, masker} from 'vue-the-mask';
+import {mask, tokens} from 'vue-the-mask';
+import masker from './masker';
 
 class TheMask extends React.Component {
 
@@ -22,9 +23,10 @@ class TheMask extends React.Component {
 
     componentDidMount(){
         if(!!this.props.value){
-            this.setState({display: this.props.value});
+            this.refresh(masker(this.props.value, this.config.mask, true, this.config.tokens));
         }
         mask(this.el.current, {value: this.config.mask});
+        this.el.current.addEventListener('input', this.onInput); //For some reason OnChange is not Working
     }
 
     onInput = (e) => {
@@ -44,7 +46,7 @@ class TheMask extends React.Component {
     };
 
     render(){
-        return (<input type="text" ref={this.el} value={this.state.display} onChange={this.onInput} />);
+        return (<input type="text" ref={this.el} value={this.state.display} onChange={() => {}} />);
     }
 
 }
