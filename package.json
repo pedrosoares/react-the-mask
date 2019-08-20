@@ -1,6 +1,6 @@
 {
   "name": "react-the-mask",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Tiny (2KB) and dependency free mask input for React Based on vue-the-mask",
   "main": "dist/react-the-mask.js",
   "files": [

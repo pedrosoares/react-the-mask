@@ -46,7 +46,17 @@ class TheMask extends React.Component {
     };
 
     render(){
-        return (<input type="text" ref={this.el} value={this.state.display} onChange={() => {}} />);
+        const props = Object.assign({
+            type: 'text'
+        }, this.props, {
+            ref: this.el,
+            value: this.state.display,
+            onChange: () => {}
+        });
+
+        delete props.children;
+
+        return (<input {...props} />);
     }
 
 }
