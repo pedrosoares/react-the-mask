@@ -46,6 +46,9 @@ class TheMask extends React.Component {
     };
 
     render(){
+        if(!!this.props.value){
+            this.refresh(masker(this.props.value, this.config.mask, true, this.config.tokens));
+        }
         const props = Object.assign({
             type: 'text'
         }, this.props, {
