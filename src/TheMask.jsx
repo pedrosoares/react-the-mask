@@ -29,6 +29,10 @@ class TheMask extends React.Component {
         this.el.current.addEventListener('input', this.onInput); //For some reason OnChange is not Working
     }
 
+    componentWillUnmount() {
+        this.el.current.removeEventListener('input'); //For some reason OnChange is not Working
+    }
+
     onInput = (e) => {
         if (e.isTrusted) return; // ignore native event
         this.refresh(e.target.value);
