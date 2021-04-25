@@ -8,14 +8,14 @@ class TheMask extends React.Component {
         super(props);
 
         this.state = {
-            lastValue: "", // avoid unecessary emit when has no change
+            lastValue: "", // avoid unnecessary emit when has no change
             display: props.value || ""
         };
 
         this.config = {
             mask: props.mask,
             tokens: props.tokens || tokens,
-            masked: props.masked || false // by default emits the value unformatted, change to true to format with the mask
+            masked: props.masked || false // by default emits the value unformulated, change to true to format with the mask
         };
 
         this.el = React.createRef();
@@ -26,11 +26,11 @@ class TheMask extends React.Component {
             this.refresh(masker(this.props.value, this.config.mask, true, this.config.tokens));
         }
         mask(this.el.current, {value: this.config.mask});
-        this.el.current.addEventListener('input', this.onInput); //For some reason OnChange is not Working
+        this.el.current.addEventListener('input', this.onInput);
     }
 
     componentWillUnmount() {
-        this.el.current.removeEventListener('input'); //For some reason OnChange is not Working
+        this.el.current.removeEventListener('input');
     }
 
     onInput = (e) => {
@@ -53,15 +53,18 @@ class TheMask extends React.Component {
         if(!!this.props.value){
             this.refresh(masker(this.props.value, this.config.mask, true, this.config.tokens));
         }
-        const props = Object.assign({
-            type: 'text'
-        }, this.props, {
+
+        let props = {
+            type: 'text',
+            ...this.props,
             ref: this.el,
             value: this.state.display,
-            onChange: () => {}
-        });
+            onChange: () => {},
+            children: null
+        };
 
         delete props.children;
+        delete props.mask;
 
         return (<input {...props} />);
     }
